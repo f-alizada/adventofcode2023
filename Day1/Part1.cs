@@ -2,12 +2,7 @@
 
 public class Part1
 {
-    public static void Main(string[] args)
-    {
-        GetCalibrationValuePart1("a1b2c3d4e5f");
-    }
-
-    public static int GetCalibrationValuePart1(string line)
+    public static int GetCalibrationValue(string line)
     {
         var consoleHelper = new ConsoleHelper(line, 100);
         int firstDigitIndex = -1, secondDigitIndex = -1;
@@ -38,74 +33,76 @@ public class Part1
         }
         return -1;
     }
-}
 
-public class ConsoleHelper
-{
-    private int inputCurosrTop;
-    private int stepCursorTop;
-    private int answerCursorTop;
-    private int sleepTime;
-    private string inputLine;
 
-    public ConsoleHelper(string input, int sleepTime = 1000)
+    class ConsoleHelper
     {
-        inputLine = input;
-        inputCurosrTop = Console.CursorTop;
-        stepCursorTop = Console.CursorTop + 1;
-        answerCursorTop = Console.CursorTop + 2;
-        this.sleepTime = sleepTime;
+        private int inputCurosrTop;
+        private int stepCursorTop;
+        private int answerCursorTop;
+        private int sleepTime;
+        private string inputLine;
 
-        Console.CursorVisible = false;
-    }
-
-    public void Sleep()
-    {
-        Thread.Sleep(sleepTime);
-    }
-
-    public void DrawInputLine(int firstDigitIndex, int secondDigitIndex)
-    {
-        Console.SetCursorPosition(0, inputCurosrTop);
-        Console.CursorLeft = 0;
-
-        for (var i = 0; i < inputLine.Length; i++)
+        public ConsoleHelper(string input, int sleepTime = 1000)
         {
-            var currentForegroundColor = Console.ForegroundColor;
-            if (firstDigitIndex == i || secondDigitIndex == i)
+            inputLine = input;
+            inputCurosrTop = Console.CursorTop;
+            stepCursorTop = Console.CursorTop + 1;
+            answerCursorTop = Console.CursorTop + 2;
+            this.sleepTime = sleepTime;
+
+            Console.CursorVisible = false;
+        }
+
+        public void Sleep()
+        {
+            Thread.Sleep(sleepTime);
+        }
+
+        public void DrawInputLine(int firstDigitIndex, int secondDigitIndex)
+        {
+            Console.SetCursorPosition(0, inputCurosrTop);
+            Console.CursorLeft = 0;
+
+            for (var i = 0; i < inputLine.Length; i++)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                var currentForegroundColor = Console.ForegroundColor;
+                if (firstDigitIndex == i || secondDigitIndex == i)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                Console.Write(inputLine[i]);
+                Console.ForegroundColor = currentForegroundColor;
             }
-            Console.Write(inputLine[i]);
-            Console.ForegroundColor = currentForegroundColor;
+            Sleep();
         }
-        Sleep();
-    }
 
-    public void DrawCurrentCursor(int skip)
-    {
-        Console.SetCursorPosition(0, stepCursorTop);
-        Console.CursorLeft = 0;
-        for (var i = 0; i < skip; i++)
+        public void DrawCurrentCursor(int skip)
         {
-            Console.Write(' ');
+            Console.SetCursorPosition(0, stepCursorTop);
+            Console.CursorLeft = 0;
+            for (var i = 0; i < skip; i++)
+            {
+                Console.Write(' ');
+            }
+            Console.Write('^');
+            Sleep();
         }
-        Console.Write('^');
-        Sleep();
-    }
 
-    public void DrawCurrentAnswer(int firstDigitIndex, int secondDigitIndex)
-    {
-        if (firstDigitIndex < 0 || secondDigitIndex < 0)
+        public void DrawCurrentAnswer(int firstDigitIndex, int secondDigitIndex)
         {
-            return;
-        }
-        Console.SetCursorPosition(0, answerCursorTop);
-        Console.CursorLeft = 0;
+            if (firstDigitIndex < 0 || secondDigitIndex < 0)
+            {
+                return;
+            }
+            Console.SetCursorPosition(0, answerCursorTop);
+            Console.CursorLeft = 0;
 
-        Console.Write("Answer:");
-        Console.Write(inputLine[firstDigitIndex]);
-        Console.Write(inputLine[secondDigitIndex]);
-        Sleep();
+            Console.Write("Answer:");
+            Console.Write(inputLine[firstDigitIndex]);
+            Console.Write(inputLine[secondDigitIndex]);
+            Sleep();
+        }
     }
 }
+
