@@ -11,14 +11,14 @@ namespace Day1
 
         public ConsoleHelper(string input, int sleepTime = 1000)
         {
+            Console.Clear();
+            Console.CursorVisible = false;
+
             inputLine = input;
             inputCurosrTop = Console.CursorTop;
             stepCursorTop = Console.CursorTop + 1;
             answerCursorTop = Console.CursorTop + 2;
             this.sleepTime = sleepTime;
-
-            Console.CursorVisible = false;
-            Console.Clear();
         }
 
         public void Sleep()

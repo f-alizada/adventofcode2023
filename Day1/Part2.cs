@@ -3,8 +3,6 @@ using System.Text;
 
 public class Part2
 {
-    
-
     private static Dictionary<string, char> numberData = new Dictionary<string, char>()
     {
         { "one", '1' },

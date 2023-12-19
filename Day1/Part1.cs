@@ -3,11 +3,6 @@ using Day1;
 
 public class Part1
 {
-    public static void Main(string[] args)
-    {
-        GetCalibrationValue("7pqrstsixteen1");
-    }
-
     public static int GetCalibrationValue(string line)
     {
         var consoleHelper = new ConsoleHelper(line, 100);
